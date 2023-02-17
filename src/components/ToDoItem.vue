@@ -5,7 +5,7 @@
             <i class="material-icons remove"
                 @click="toDoStore.removeTask(toDoItem.id)"
             >do_not_disturb_on</i>
-            <i class="material-icons completed"
+            <i class="material-icons" :class="{completed: toDoItem.isCompleted}"
                 @click="toDoStore.toggleCompleteStatus(toDoItem.id)"
             >check_circle</i>
         </div>
