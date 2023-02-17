@@ -21,7 +21,6 @@ export const useToDoStore = defineStore('todoStore', {
     },
     actions: {
         getToDo() {
-            // console.log(localStorage.getItem('todo'))
             if (localStorage.getItem('todo')) {
                 try {
                     this.todo = JSON.parse(localStorage.getItem('todo'));
@@ -50,19 +49,5 @@ export const useToDoStore = defineStore('todoStore', {
             task.isCompleted = !task.isCompleted
             this.saveToDo();
         }
-        // async toggleCompleteStatus(id) {
-        //     const task = this.todo.find(t => t.id === id)
-        //     task.isCompleted = !task.isCompleted
-
-        //     const res = await fetch('http://localhost:3000/todo/' + id, {
-        //         method: 'PATCH',
-        //         body: JSON.stringify({ isCompleted: task.isCompleted }),
-        //         headers: { 'Content-Type': 'application/json' }
-        //     })
-
-        //     if (res.error) {
-        //         console.log(res.error);
-        //     }
-        // }
     }
 })
