@@ -1,26 +1,23 @@
 <template>
-  <header>
-    <h1>Piniaaaa</h1>
-    <p>{{ toDoStore.name }}</p>
-  </header>
   <nav class="filter">
     <button @click="toDoStore.$reset">Reset</button>
-    <button @click="filter = 'all'">All</button>
-    <button @click="filter = 'completed'">Completed</button>
+    <button @click="filter = 'all'" 
+      :class="{all: filter==='all'}"
+    >All ({{ toDoStore.totalCount }})</button>
+    <button @click="filter = 'completed'"
+    :class="{completed: filter==='completed'}"
+    >Completed ({{ toDoStore.completedCount }})</button>
     <div class="new-task-form">
       <AddTaskForm />
     </div>
   </nav>
   <hr>
-  <!-- <div class="loading" v-if="toDoStore.isLoading">Loading....</div> -->
   <div v-if="filter === 'all'">
-    <h2 class="title">All Tasks ({{ toDoStore.totalCount }})</h2>
     <div class="task-list" v-for="toDoItem in todo">
       <ToDoItem :toDoItem="toDoItem" />
     </div>
   </div>
   <div v-if="filter === 'completed'">
-    <h2 class="title">Completed Tasks ({{ toDoStore.completedCount }})</h2>
     <div class="task-list" v-for="toDoItem in completed">
       <ToDoItem :toDoItem="toDoItem" />
     </div>
@@ -61,5 +58,12 @@ export default {
 button {
   min-width: 70px;
   margin: 10px 5px 0px 0px;
+}
+
+.completed{
+  background-color: #06d6a0;
+}
+.all{
+  background-color: lightskyblue;
 }
 </style>
