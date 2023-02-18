@@ -1,17 +1,17 @@
 <template>
+   <div class="new-task-form">
+    <AddTaskForm />
+  </div>
   <nav class="filter">
-    <button @click="toDoStore.$reset">Reset</button>
-    <button @click="filter = 'all'" 
-      :class="{all: filter==='all'}"
-    >All ({{ toDoStore.totalCount }})</button>
-    <button @click="filter = 'completed'"
-    :class="{completed: filter==='completed'}"
-    >Completed ({{ toDoStore.completedCount }})</button>
-    <div class="new-task-form">
-      <AddTaskForm />
-    </div>
+    <h2 class="name">TODOLIST</h2>
+    <!-- <button @click="toDoStore.$reset">Reset</button> -->
+    <button class="b-all" @click="filter = 'all'" :class="{ all: filter === 'all' }">All
+      ({{ toDoStore.totalCount }})</button>
+    <button class="b-completed" @click="filter = 'completed'" :class="{ completed: filter === 'completed' }">Completed
+      ({{ toDoStore.completedCount }})</button>
+
   </nav>
-  <hr>
+ 
   <div v-if="filter === 'all'">
     <div class="task-list" v-for="toDoItem in todo">
       <ToDoItem :toDoItem="toDoItem" />
@@ -51,19 +51,41 @@ export default {
 }
 
 .filter {
+  max-height: fit-content;
+  max-width: 640px;
+  margin: 2px auto;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.name{
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 444;
+  flex-grow: 2;
+  margin:0px auto;
+}
+.filter button {
+  height: fit-content;
+  min-width: 80px;
+  margin-left: 5px;
+  padding: 5px;
+  font-size: medium;
 }
 
-button {
-  min-width: 70px;
-  margin: 10px 5px 0px 0px;
-}
-
-.completed{
+.completed {
   background-color: #06d6a0;
 }
-.all{
+
+.all {
   background-color: lightskyblue;
+}
+
+.b-all {
+  border-color: #003f88;
+}
+
+.b-completed {
+  border-color: #06d6a0;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
     <form @submit.prevent="handleSubmit">
-        <input type="text" placeholder="Your task..." v-model="newTask" />
+        <input type="text" placeholder="Add your task here and enter..." autofocus v-model="newTask" />
     </form>
 </template>
 
 <script>
-import {ref} from 'vue'
+import { ref } from 'vue'
 import { useToDoStore } from '../stores/ToDoStore';
 export default {
     setup() {
@@ -30,7 +30,18 @@ export default {
 </script>
 
 <style scoped>
- input{
-    margin: 10px 5px 0px 0px;
- }
+input {
+    margin: 15px auto;
+    width: 600px;
+    height: 45px;
+    padding: 2px 20px;
+    /* margin-top: 10px; */
+    border-radius: 6px;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 3px 3px 6px;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.4s;
+    border: 0px;
+}
 </style>
