@@ -7,6 +7,7 @@
 <script>
 import { ref } from 'vue'
 import { useToDoStore } from '../stores/ToDoStore';
+import moment from 'moment'
 export default {
     setup() {
         const toDoStore = useToDoStore();
@@ -18,8 +19,11 @@ export default {
                     //object
                     title: newTask.value,
                     isCompleted: false,
-                    id: Math.floor(Math.random() * 10000)
+                    id: Math.floor(Math.random() * 10000),
+                    date:new Date().toLocaleDateString()
                 })
+                // console.log(moment(String(new Date().toLocaleString())).format('ll'));
+                // console.log(new Date().toLocaleDateString());
                 newTask.value = ''
             }
         }
@@ -35,7 +39,6 @@ input {
     width: 600px;
     height: 45px;
     padding: 2px 20px;
-    /* margin-top: 10px; */
     border-radius: 6px;
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 3px 3px 6px;

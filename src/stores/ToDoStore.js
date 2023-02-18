@@ -10,9 +10,17 @@ export const useToDoStore = defineStore('todoStore', {
         completed() {
             return this.todo.filter(c => c.isCompleted)
         },
+        active() {
+            return this.todo.filter(c => !c.isCompleted)
+        },
         completedCount() {
             return this.todo.reduce((prev, task) => {
                 return task.isCompleted ? prev + 1 : prev
+            }, 0)
+        },
+        activeCount(){
+            return this.todo.reduce((prev, task) => {
+                return !task.isCompleted ? prev + 1 : prev
             }, 0)
         },
         totalCount(state) {
@@ -37,6 +45,12 @@ export const useToDoStore = defineStore('todoStore', {
             let parsed = JSON.stringify(this.todo);
             localStorage.setItem('todo', parsed);
         },
+        editToDo(id){
+            const editTask = this.todo.find(t => t.id === id)
+            console.log(editTask);
+            editTask.title="edit done"
+            this.saveToDo();
+        },
         removeTask(id) {
             this.todo = this.todo.filter(t => {
                 return t.id !== id
@@ -45,7 +59,6 @@ export const useToDoStore = defineStore('todoStore', {
         },
         toggleCompleteStatus(id) {
             const task = this.todo.find(t => t.id === id)
-            console.log(task);
             task.isCompleted = !task.isCompleted
             this.saveToDo();
         }

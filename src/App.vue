@@ -1,5 +1,5 @@
 <template>
-   <div class="new-task-form">
+  <div class="new-task-form">
     <AddTaskForm />
   </div>
   <nav class="filter">
@@ -7,13 +7,20 @@
     <!-- <button @click="toDoStore.$reset">Reset</button> -->
     <button class="b-all" @click="filter = 'all'" :class="{ all: filter === 'all' }">All
       ({{ toDoStore.totalCount }})</button>
+    <button class="b-active" @click="filter = 'active'" :class="{ active: filter === 'active' }">Active
+      ({{ toDoStore.activeCount }})</button>
     <button class="b-completed" @click="filter = 'completed'" :class="{ completed: filter === 'completed' }">Completed
       ({{ toDoStore.completedCount }})</button>
 
   </nav>
- 
+
   <div v-if="filter === 'all'">
     <div class="task-list" v-for="toDoItem in todo">
+      <ToDoItem :toDoItem="toDoItem" />
+    </div>
+  </div>
+  <div v-if="filter === 'active'">
+    <div class="task-list" v-for="toDoItem in active">
       <ToDoItem :toDoItem="toDoItem" />
     </div>
   </div>
@@ -35,11 +42,11 @@ export default {
   setup() {
     const toDoStore = useToDoStore()
     const filter = ref('all')
-    const { todo, name, isLoading, completed } = storeToRefs(toDoStore)
+    const { todo, name, isLoading, completed, active } = storeToRefs(toDoStore)
     //fetch toDoList
     toDoStore.getToDo()
 
-    return { toDoStore, filter, todo, name, isLoading, completed }
+    return { toDoStore, filter, todo, isLoading, completed, active }
   },
 }
 </script>
@@ -58,13 +65,15 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.name{
+
+.name {
   font-size: 40px;
   font-style: italic;
   font-weight: 444;
   flex-grow: 2;
-  margin:0px auto;
+  margin: 0px auto;
 }
+
 .filter button {
   height: fit-content;
   min-width: 80px;
@@ -77,6 +86,10 @@ export default {
   background-color: #06d6a0;
 }
 
+.active {
+  background-color: #F2921D;
+}
+
 .all {
   background-color: lightskyblue;
 }
@@ -85,7 +98,10 @@ export default {
   border-color: #003f88;
 }
 
+.b-active {
+  border-color: #F99417;
+}
+
 .b-completed {
   border-color: #06d6a0;
-}
-</style>
+}</style>
