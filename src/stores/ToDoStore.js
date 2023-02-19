@@ -7,6 +7,10 @@ export const useToDoStore = defineStore('todoStore', {
         isLoading: false
     }),
     getters: {
+        getTitle(id){
+            const t = this.todo.find(t => t.id === id);
+            return t.title;
+        },
         completed() {
             return this.todo.filter(c => c.isCompleted)
         },
@@ -45,11 +49,13 @@ export const useToDoStore = defineStore('todoStore', {
             let parsed = JSON.stringify(this.todo);
             localStorage.setItem('todo', parsed);
         },
-        editToDo(id){
+        editToDo(id,editContent){
             const editTask = this.todo.find(t => t.id === id)
             console.log(id +" va "+ editTask);
-            // editTask.title="edit done"
-            // this.saveToDo();
+            editTask.title = editContent;
+            console.log(editTask.title);
+            this.saveToDo();
+
         },
         removeTask(id) {
             this.todo = this.todo.filter(t => {
