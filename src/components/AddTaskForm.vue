@@ -20,10 +20,9 @@ export default {
                     title: newTask.value,
                     isCompleted: false,
                     id: Math.floor(Math.random() * 10000),
-                    date:new Date().toLocaleDateString()
+                    date:moment(String(new Date().toLocaleString())).format('ll')
                 })
-                // console.log(moment(String(new Date().toLocaleString())).format('ll'));
-                // console.log(new Date().toLocaleDateString());
+                // console.log();
                 newTask.value = ''
             }
         }

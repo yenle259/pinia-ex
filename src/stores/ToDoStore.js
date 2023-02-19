@@ -47,9 +47,9 @@ export const useToDoStore = defineStore('todoStore', {
         },
         editToDo(id){
             const editTask = this.todo.find(t => t.id === id)
-            console.log(editTask);
-            editTask.title="edit done"
-            this.saveToDo();
+            console.log(id +" va "+ editTask);
+            // editTask.title="edit done"
+            // this.saveToDo();
         },
         removeTask(id) {
             this.todo = this.todo.filter(t => {

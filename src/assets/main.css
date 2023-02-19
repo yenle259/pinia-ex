@@ -67,6 +67,10 @@ header {
   margin-top: 0px;
 }
 
+.task .title input{
+  margin-top: 0px;
+}
+
 .task .o-right {
   text-align: right;
 }
