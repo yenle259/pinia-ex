@@ -52,7 +52,6 @@ export default {
     };
 
     const handleEdit = (id) =>{
-        console.log(id +" and " +editedContent.value);
         isEdit.value = false;
         toDoStore.editToDo(id,editedContent)
     }
